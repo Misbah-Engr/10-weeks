@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Test.sol";
-import {victimContract, attacker} from "../src/Week2.sol";
-import "forge-std/console.sol";
+import {Test} from "forge-std/Test.sol";
+import {victimContract, attacker} from "../../src/week2/Reentrancy.sol";
+import {console} from "forge-std/console.sol";
 
 contract TestReentrancy is Test {
     victimContract public victimC;
@@ -25,10 +25,11 @@ contract TestReentrancy is Test {
         vm.stopPrank();
 
         vm.startPrank(address(attackerContract));
-        attackerContract.deposit{value: 1 ether}(address(victimC));
+        console.log(address(attackerContract).balance, "Attacker balance before attack");
+        attackerContract.deposit{value: 10 ether}(address(victimC));
         attackerContract.withdraw(address(victimC));
         vm.stopPrank();
         assertEq(address(victimC).balance, 0);
-        console.log(address(attackerContract).balance);
+        console.log(address(attackerContract).balance, "Attacker balance after attack");
     }
 }

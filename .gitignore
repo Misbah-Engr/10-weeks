@@ -1,0 +1,17 @@
+.env
+foundry*/
+remix*/
+html*/
+
+foundry-*/
+remix*/
+html*/
+background*
+.DS_Store
+
+/lib/
+/out/
+/cache/
+
+# JavaScript Solidity compiler (auto-downloaded by Remix IDE)
+soljson-*.js
