@@ -4,5 +4,7 @@ contract Example {
     bool public paused;     // Slot 1 (1 byte, starts at byte 20, packed with owner)
     uint256 public b;       // Slot 2
 
-    mapping(address => uintt256) public balances;
+    mapping(address => uint256) public balances;
+
+    mapping(address => mapping(uint256 => bool)) balancesStatus;
 }
