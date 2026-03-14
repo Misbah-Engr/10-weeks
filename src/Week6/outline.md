@@ -1,6 +1,6 @@
 ## Layer 2 Blockchains & Cross-Chain Protocols Outline
 
-Week 5, Day 1
+Week 6, Day 1
 
 ### Hour 1: Layer 2 Blockchains
 - Why L2s Exist and What They Actually Are
